@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/YusongWang/mining_proxy/9ec34e9d780866ab8792df09a9d6ec0b0f01b013/images/logo.png" width="350"/>
+  <img src="https://raw.githubusercontent.com/etpool/mining_proxy/9ec34e9d780866ab8792df09a9d6ec0b0f01b013/images/logo.png" width="350"/>
 </h1>
 
 <h2 align="center">全开源 - 无内置开发者钱包</h2>
@@ -20,7 +20,7 @@
     <img src="https://img.shields.io/badge/License-Apache-green.svg" alt="travis">
   </a>
 </p>
-<p align="center">最新版本见Release <a href="https://github.com/YusongWang/mining_proxy/releases">Github Release</a></p>
+<p align="center">最新版本见Release <a href="https://github.com/etpool/mining_proxy/releases">Github Release</a></p>
 <p align="center">历史版本: https://github.com/dothinkdone/mining_proxy/releases</p>
 <p align="center">
 Coffee: Eth+BSC+HECO+Matic: 0x3602b50d3086edefcd9318bcceb6389004fb14ee
@@ -31,7 +31,7 @@ Coffee: Eth+BSC+HECO+Matic: 0x3602b50d3086edefcd9318bcceb6389004fb14ee
   <a href="https://jq.qq.com/?_wv=1027&k=AWfknDiw">QQ 群</a> 
 </p>
 
-![Screenshot](https://raw.githubusercontent.com/YusongWang/mining_proxy/main/images/web1.jpg)
+![Screenshot](https://raw.githubusercontent.com/etpool/mining_proxy/main/images/web1.jpg)
 
 ## :sparkles: 特性
 
@@ -50,7 +50,7 @@ Coffee: Eth+BSC+HECO+Matic: 0x3602b50d3086edefcd9318bcceb6389004fb14ee
 Windows 双击运行即可
 Liunx 一键安装脚本
 ```shell
-bash <(curl -s -L https://raw.githubusercontent.com/YusongWang/mining_proxy/main/script/install.sh)
+bash <(curl -s -L https://raw.githubusercontent.com/etpool/mining_proxy/main/script/install.sh)
 ```
 
 在软件运行目录下创建 .env 文件
@@ -65,8 +65,8 @@ JWT_SECRET=test
 
 
 ## 其他说明
-<a href="https://github.com/YusongWang/mining_proxy_web">Web界面地址</a><br>
+<a href="https://github.com/etpool/mining_proxy_web">Web界面地址</a><br>
 
 ## 抽水逻辑说明
 
-![Screenshot](https://raw.githubusercontent.com/YusongWang/mining_proxy/main/images/fee.jpg)
+![Screenshot](https://raw.githubusercontent.com/etpool/mining_proxy/main/images/fee.jpg)

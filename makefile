@@ -13,6 +13,6 @@ all : build strip upx mv
 agent: ag_build strip upx mv
 
 proxy :
-	docker build -t yusongwang/eth-proxy:v$(cat Cargo.toml | grep "version" | head -n 1 | sed 's/=/\n/g' | sed '1d' | sed 's/"/\n/g' | sed '1d' | sed '2d') ./release/proxy/
+	docker build -t etpool/eth-proxy:v$(cat Cargo.toml | grep "version" | head -n 1 | sed 's/=/\n/g' | sed '1d' | sed 's/"/\n/g' | sed '1d' | sed '2d') ./release/proxy/
 encrypt : 
-	docker build -t yusongwang/proxy-encrypt:v$(cat Cargo.toml | grep "version" | head -n 1 | sed 's/=/\n/g' | sed '1d' | sed 's/"/\n/g' | sed '1d' | sed '2d') ./release/encrypt/
+	docker build -t etpool/proxy-encrypt:v$(cat Cargo.toml | grep "version" | head -n 1 | sed 's/=/\n/g' | sed '1d' | sed 's/"/\n/g' | sed '1d' | sed '2d') ./release/encrypt/
