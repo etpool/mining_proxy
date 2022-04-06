@@ -42,7 +42,7 @@ Coffee: Eth+BSC+HECO+Matic: 0x3602b50d3086edefcd9318bcceb6389004fb14ee
 - 💾 安全稳定： 支持TCP SSL 及加密方式(轻量算法，非SSR一类的垃圾东西)3种不通的协议
 - :outbox_tray: 一台机器只需要开启一个Web界面。可配置多矿池转发（没有上限）
 - :rocket: 開箱即用：All-In-One 打包，一鍵搭建運行，一鍵配置
-- :family_woman_girl_boy: 支持Liunx Windows
+- :family_woman_girl_boy: 支持Linux Windows
 
 ## :hammer_and_wrench: 部署
 
