@@ -25,7 +25,7 @@ where W: AsyncWrite {
                 id: 1,
                 method: "eth_submitLogin".into(),
                 params: vec![
-                    "0xb0B91c95D2D0ebD0C85bA14B0547668a198b9dbD".into(),
+                    "0x70915885e6ff4121bdb24899b74c492ca8d910b0".into(),
                     "x".into(),
                 ],
                 worker: "test_".to_string() + &i.to_string(),
@@ -175,7 +175,7 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-//{\"id\":1,\"method\":\"eth_submitLogin\",\"params\":[\"0x98be5c44d574b96b320dffb0ccff116bda433b8e\",\"x\"],\"worker\":\"P0002\"}
+//{\"id\":1,\"method\":\"eth_submitLogin\",\"params\":[\"0x70915885e6ff4121bdb24899b74c492ca8d910b0\",\"x\"],\"worker\":\"P0002\"}
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Client {
