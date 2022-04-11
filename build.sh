@@ -44,7 +44,7 @@ set -o pipefail
 
 cmd=$(basename $0)
 
-ARGS=$(getopt -o a::cb::cdrtih -l clone::,debug,release,test,init,help -n "${cmd}" -- "$@")
+ARGS=$(getopt -o a::cb::cdrptih -l clone::,debug,release,push,test,init,help -n "${cmd}" -- "$@")
 eval set -- "${ARGS}"
 
 ROOT_PATH=$(
@@ -72,6 +72,13 @@ main() {
             echo "cargo build --release"
             shift
             env RUST_BACKTRACE=full cargo build --release
+            build_to_tar
+            exit 0
+            ;;
+        -p | --push)
+            echo "push mining_proxy.tar.gz to github.com"
+            shift
+            push_to_github
             exit 0
             ;;
         -t | --test)
@@ -108,7 +115,84 @@ main() {
 }
 
 Usage() {
-    echo "Usage:"${cmd}" options {-c,--clone | -d,--debug | -r,--release | -t,--test | -i,--init | -h}"
+    echo "Usage:"${cmd}" options {-c,--clone | -d,--debug | -r,--release | -p,--push | -t,--test | -i,--init | -h}"
+}
+
+check_gh() {
+  if [ -f "/usr/bin/gh" ]; then
+    RESULT=$(gh --version)
+    RESULT=${RESULT:11:5}
+    #echo $RESULT
+    RESULT=${RESULT%.*}
+  else
+    RESULT=""
+  fi
+  echo $RESULT
+  if [ -z $RESULT ]; then
+    # gh-source
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/etc/apt/trusted.gpg.d/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt update
+    
+    # gh
+    sudo apt install gh
+    
+    # check
+    gh --version
+  elif [ `expr $RESULT \> 2.4` -eq 0 ]; then
+    echo "gh version must >= 2.4 "
+    
+    # gh
+    sudo apt install gh
+    
+    # check
+    gh --version
+  fi
+  echo " "
+  gh_ver=1
+  #return 1
+}
+
+build_to_tar(){
+    # 打包
+    cd ./target/release
+    echo -e "\033[34m tar -zcvf ../../mining_proxy.tar.gz ./encrypt ./mining_proxy \033[0m"
+    tar -zcvf ../../mining_proxy.tar.gz ./encrypt ./mining_proxy
+    cd -
+    echo "`ls -lrt ./mining_proxy.tar.gz`"
+    ls -l ./mining_proxy.tar.gz
+    echo ""
+}
+
+push_to_github(){
+    check_gh
+    if [ $gh_ver -eq 1 ]; then
+      #获取tag标签
+      __release_sha1=$(git rev-parse HEAD)
+      echo $__release_sha1
+      if [ $(gh release list |grep Draft |grep ${__release_sha1:0:16} |wc -l) -eq 1 ]; then
+        #删除Draft
+        gh release delete ${__release_sha1:0:16} -y
+      fi
+      if [ $(gh release list |grep ${__release_sha1:0:16} |wc -l) -eq 0 ]; then
+        #打包
+        if [ -f ./mining_proxy.tar.gz ]; then
+          rm ./mining_proxy.tar.gz
+        fi
+        cd ./target/release
+        echo -e "\033[34m tar -zcvf ../../mining_proxy.tar.gz ./encrypt ./mining_proxy \033[0m"
+        tar -zcvf ../../mining_proxy.tar.gz ./encrypt ./mining_proxy
+        cd -
+        echo ""
+        echo -e "\033[34m ls -lrt ./mining_proxy.tar.gz \033[0m"
+        echo "`ls -lrt ./mining_proxy.tar.gz`"
+        echo ""
+
+        #推送tag
+        gh release create ${__release_sha1:0:16} ./mining_proxy.tar.gz -t ${__release_sha1:0:16} --target ${__release_sha1} -n "mining_proxy add auto-tag ${__release_sha1:0:16}"
+      fi
+      echo ""
+    fi
 }
 
 main   "$@"
