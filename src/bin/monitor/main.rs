@@ -17,7 +17,7 @@ async fn main() -> Result<()> {
     mining_proxy::util::logger::init("monitor", "./logs/".into(), 0)?;
 
     info!(
-        "✅ {}, 版本: {} commit: {} {}",
+        "✅ {}  version: {} commit: {} {}",
         crate_name!(),
         crate_version!(),
         version::commit_date(),

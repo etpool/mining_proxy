@@ -16,7 +16,7 @@ use self::config::Settings;
 
 pub fn get_app_command_matches() -> Result<ArgMatches<'static>> {
     let matches = App::new(format!(
-        "{}, 版本: {} commit: {} {}",
+        "{}  version: {} commit: {} {}",
         crate_name!(),
         crate_version!(),
         version::commit_date(),
@@ -45,7 +45,7 @@ pub fn get_app_command_matches() -> Result<ArgMatches<'static>> {
 
 pub async fn get_encrypt_command_matches() -> Result<ArgMatches<'static>> {
     let matches = App::new(format!(
-        "{}, 版本: {} commit: {} {}",
+        "{}  version: {} commit: {} {}",
         crate_name!(),
         crate_version!(),
         version::commit_date(),

@@ -20,6 +20,7 @@ use mining_proxy::{
 use anyhow::{bail, Result};
 use bytes::BytesMut;
 use clap::ArgMatches;
+use clap::{crate_name, crate_version};
 use human_panic::setup_panic;
 use native_tls::Identity;
 
@@ -41,6 +42,15 @@ fn main() -> Result<()> {
     mining_proxy::init();
 
     let matches = mining_proxy::util::get_app_command_matches()?;
+
+    println!(
+        "✅ {}  version: {} commit: {} {}",
+        crate_name!(),
+        crate_version!(),
+        version::commit_date(),
+        version::short_sha()
+    );
+
     if !matches.is_present("server") {
         actix_web::rt::System::with_tokio_rt(|| {
             tokio::runtime::Builder::new_multi_thread()
